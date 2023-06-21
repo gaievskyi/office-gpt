@@ -67,9 +67,7 @@ export async function prompt(formData: FormData) {
   return validatedCompletion.success ? validatedCompletion.data : null
 }
 
-async function requestCompletion(
-  input: string
-) {
+async function requestCompletion(input: string) {
   try {
     return await openAI.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -83,4 +81,3 @@ async function requestCompletion(
     return null
   }
 }
-
