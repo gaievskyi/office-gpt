@@ -2,7 +2,14 @@
 
 import { useToast } from "@/lib/hooks"
 
-import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "./toast"
+import {
+  Toast,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport,
+} from "./toast"
 
 export const Toaster = () => {
   const { toasts } = useToast()

@@ -26,7 +26,8 @@ export default function Home() {
         toast({
           variant: "destructive",
           title: "Oops!",
-          description: "Coś poszło nie tak podczas przetwarzania wiadomości. Spróbuj ponownie.",
+          description:
+            "Coś poszło nie tak podczas przetwarzania wiadomości. Spróbuj ponownie.",
         })
         return
       }
@@ -58,7 +59,8 @@ export default function Home() {
             >
               {isPending ? (
                 <>
-                  <Loader className="animate-spin" size={20} /> <span className="text-base">Działam..</span>
+                  <Loader className="animate-spin" size={20} />{" "}
+                  <span className="text-base">Działam..</span>
                 </>
               ) : (
                 <>
