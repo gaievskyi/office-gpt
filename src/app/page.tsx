@@ -32,7 +32,7 @@ export default function Home() {
       }
       setCompletion(response)
       toast({
-        title: "Wszystko gotowe!",
+        title: "Sukces!",
         description: "Podsumowanie ogłoszenia o pracę jest gotowe.",
       })
       formRef.current?.reset()
@@ -54,7 +54,7 @@ export default function Home() {
             <button
               type="submit"
               disabled={isPending}
-              className="flex min-w-[120px] items-center justify-center gap-2 rounded-full bg-white p-4 text-black transition-all hover:brightness-90 disabled:cursor-not-allowed disabled:brightness-90 md:max-w-[160px]"
+              className="flex min-w-[120px] items-center justify-center gap-2 rounded-full bg-white p-4 text-black transition-all hover:brightness-90 disabled:cursor-not-allowed disabled:brightness-75 md:max-w-[160px]"
             >
               {isPending ? (
                 <>

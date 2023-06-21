@@ -57,8 +57,8 @@ export const Output = ({ role, requirements, suggestedDepartments, isLoading }: 
         </div>
         <button
           onClick={copy}
-          disabled={!role || !requirements || !suggestedDepartments || isLoading}
-          className="ml-auto mt-2 flex max-w-[200px] items-center justify-center gap-2 rounded-xl bg-white p-3 text-black transition-all hover:brightness-90 disabled:cursor-not-allowed disabled:bg-[#666161] hover:disabled:hover:brightness-100"
+          disabled={!role || !requirements || !suggestedDepartments}
+          className="ml-auto mt-2 flex max-w-[200px] items-center justify-center gap-2 rounded-xl bg-white p-3 text-black transition-all hover:brightness-90 disabled:cursor-not-allowed disabled:brightness-75 hover:disabled:hover:brightness-75"
         >
           <Copy size={16} /> <span className="text-sm">Kopiuj</span>
         </button>
