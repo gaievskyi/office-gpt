@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-wrap items-start justify-center gap-8 bg-[#232328] py-6 text-white">
+    <main className="flex min-h-screen flex-wrap items-start justify-center gap-8 py-6 text-white">
       <div className="container flex flex-col gap-5 px-4 xl:max-w-[55%]">
         <div className="flex flex-col gap-5">
           <form action={(formData) => void onSubmit(formData)} ref={formRef} className="flex flex-col gap-4">

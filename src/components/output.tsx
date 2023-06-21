@@ -37,6 +37,14 @@ export const Output = ({ role, requirements, suggestedDepartments, isLoading }: 
         ))}
       </div>
       <button
+        onClick={() =>
+          void navigator.clipboard.writeText(`
+            Role: ${role}
+            Requirements: ${requirements.join(", ")}
+            Suggested departments:
+            ${suggestedDepartments.map((dept) => `- ${dept.departmentName}: ${dept.match}%`).join("\n")}
+          `)
+        }
         disabled={!role || !requirements || !suggestedDepartments || isLoading}
         className="ml-auto mt-2 flex max-w-[200px] items-center justify-center gap-2 rounded-xl bg-white p-3 text-black transition-all hover:brightness-90 disabled:cursor-not-allowed disabled:bg-[#666161] hover:disabled:hover:brightness-100"
       >
