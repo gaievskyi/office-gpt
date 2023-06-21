@@ -1,6 +1,6 @@
 "use client"
 
-import { Output } from "@/components"
+import { Output } from "@/ui"
 import { Bot, Loader } from "lucide-react"
 import { useRef, useState, useTransition } from "react"
 
@@ -30,11 +30,11 @@ export default function Home() {
       <div className="container flex flex-col gap-5 px-4 xl:max-w-[55%]">
         <div className="flex flex-col gap-5">
           <form action={(formData) => void onSubmit(formData)} ref={formRef} className="flex flex-col gap-4">
-            <label htmlFor="content">Wklej ofertę pracy</label>
+            <label htmlFor="input">Wklej ofertę pracy</label>
             <textarea
               placeholder="Seeking .NET/C# Developer proficient in WinForms, WPF, and Devexpress. Task: optimize a WPF time scheduler and transform WinForms to WPF. Senior/Regular+ level, English B2. Duration: 4-6 months. Contact: ada@spyro-soft.com"
-              name="content"
-              id="content"
+              name="input"
+              id="input"
               className="min-h-[200px] rounded-xl bg-[#2F2F38] p-4"
             />
             <button

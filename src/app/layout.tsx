@@ -1,25 +1,25 @@
-import { DevScreenSize, Logo } from "@/components"
+import { Logo, ScreenSize, Show } from "@/ui"
 
-import "@/lib/globals.css"
+import "./globals.css"
 
-import { Inter } from "next/font/google"
-
+import { IS_DEVELOPMENT } from "@/lib/constants"
+import { sans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 
-const inter = Inter({ subsets: ["latin"] })
-
 export const metadata = {
-  title: "OfficeGPT (Grazyna)",
-  description: "AI office helper",
+  title: "OfficeGPT - AI business assistant",
+  description: "",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, "bg-[#232328]")}>
+      <body className={cn(sans.className, "bg-[#232328]")}>
         <Logo />
         <div className="flex-1">{children}</div>
-        <DevScreenSize />
+        <Show when={IS_DEVELOPMENT}>
+          <ScreenSize />
+        </Show>
       </body>
     </html>
   )
