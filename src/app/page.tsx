@@ -63,8 +63,12 @@ export default function Home() {
 
   useEffect(() => {
     if (showOutput) {
+      const scrollHeight = document.documentElement.scrollHeight
+      const windowHeight = window.innerHeight
+      const extraOffset = 100
+
       window.scrollTo({
-        top: document.documentElement.scrollHeight,
+        top: scrollHeight - windowHeight + extraOffset,
         behavior: "smooth",
       })
     }
