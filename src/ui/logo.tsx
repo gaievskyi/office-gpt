@@ -1,7 +1,9 @@
 "use client"
 
-export const Logo = () => (
-  <div className="flex items-center gap-2 p-5">
+import { type PropsWithChildren } from "react"
+
+export const Logo = ({ children }: PropsWithChildren) => (
+  <div className="flex items-center gap-2">
     <svg
       width="38"
       height="38"
@@ -22,6 +24,6 @@ export const Logo = () => (
         fill="#FF5C21"
       />
     </svg>
-    <span className="text-white">OfficeGPT</span>
+    {children}
   </div>
 )

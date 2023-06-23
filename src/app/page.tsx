@@ -1,8 +1,10 @@
 "use client"
 
 import { Output } from "@/ui"
+import { Button } from "@/ui/kit"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { Bot, Loader } from "lucide-react"
-import { useRef, useState, useTransition } from "react"
+import { useEffect, useRef, useState, useTransition } from "react"
 
 import { useToast } from "@/lib/hooks"
 import { type Completion } from "@/lib/schemas"
@@ -14,6 +16,8 @@ const MAX_INPUT_LENGTH = 4086
 
 export default function Home() {
   const formRef = useRef<HTMLFormElement | null>(null)
+
+  const [animationParentRef] = useAutoAnimate()
 
   const [completion, setCompletion] = useState<Completion>({
     role: "",
@@ -53,13 +57,26 @@ export default function Home() {
         description: "Podsumowanie ogłoszenia o pracę jest gotowe.",
       })
       formRef.current?.reset()
+      setTextAreaCount(0)
     })
   }
 
+  useEffect(() => {
+    if (showOutput) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  }, [showOutput])
+
   return (
-    <main className="flex min-h-screen flex-wrap items-start justify-center gap-8 py-6 text-white">
+    <main className="flex flex-wrap items-start justify-center gap-8 py-6 text-white">
       <div className="container flex flex-col gap-5 px-4 xl:max-w-[55%]">
         <div className="flex flex-col gap-5">
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+            Zacznij z AI
+          </h1>
           <form action={onSubmit} ref={formRef} className="flex flex-col gap-4">
             <label htmlFor="input">Wklej ofertę pracy</label>
             <textarea
@@ -84,26 +101,29 @@ export default function Home() {
               </span>
               <span>{MAX_INPUT_LENGTH}</span>
             </small>
-            <button
-              type="submit"
-              disabled={isPending}
-              className="flex min-w-[120px] items-center justify-center gap-2 rounded-full bg-white p-4 text-black transition-all hover:brightness-90 disabled:cursor-not-allowed disabled:brightness-75 md:max-w-[160px]"
-            >
-              {isPending ? (
-                <>
-                  <Loader className="animate-spin" size={20} />{" "}
-                  <span className="text-base">Działam..</span>
-                </>
-              ) : (
-                <>
-                  <Bot size={20} />
-                  <span className="text-base">Zacznij z AI</span>
-                </>
-              )}
-            </button>
+            <div className="flex items-end justify-end">
+              <Button
+                variant="secondary"
+                type="submit"
+                disabled={isPending}
+                className="w-full gap-2 rounded-full md:max-w-[200px]"
+              >
+                {isPending ? (
+                  <>
+                    <Loader className="animate-spin" size={20} />
+                    <span className="text-base">Przetwarzam..</span>
+                  </>
+                ) : (
+                  <>
+                    <Bot size={20} />
+                    <span className="text-base">Kontynuuj z AI</span>
+                  </>
+                )}
+              </Button>
+            </div>
           </form>
         </div>
-        {showOutput && <Output {...completion} />}
+        <div ref={animationParentRef}>{showOutput && <Output {...completion} />}</div>
       </div>
     </main>
   )

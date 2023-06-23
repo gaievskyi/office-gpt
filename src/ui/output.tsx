@@ -6,6 +6,8 @@ import { useToast } from "@/lib/hooks"
 import { type Completion } from "@/lib/schemas"
 import { cn } from "@/lib/utils"
 
+import { Logo } from "./logo"
+
 export type OutputProps = Completion
 
 const getColorForMatch = (match: number) => {
@@ -40,6 +42,7 @@ export const Output = ({
 
   return (
     <div className="flex min-h-[100%] flex-col gap-5 lg:max-w-[60%]">
+      <Logo />
       <div className="flex flex-col gap-2 rounded-xl bg-[#2F2F38] p-4">
         <>
           <span className="text-xl font-light uppercase text-[#B9B9CA]">

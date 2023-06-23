@@ -18,7 +18,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(sans.className, "bg-[#232328]")}>
-        <Logo />
+        <div className="p-8">
+          <Logo>
+            <span className="text-white">OfficeGPT</span>
+          </Logo>
+        </div>
         <div className="flex-1">{children}</div>
         <Toaster />
         <Show when={IS_DEVELOPMENT}>
