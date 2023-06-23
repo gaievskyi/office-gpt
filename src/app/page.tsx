@@ -65,14 +65,14 @@ export default function Home() {
     if (showOutput) {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
-        behavior: 'smooth'
-      });
+        behavior: "smooth",
+      })
     }
-  }, [showOutput])
+  }, [showOutput, completion])
 
   return (
     <main className="flex flex-wrap items-start justify-center gap-8 py-6 text-white">
-      <div className="container flex flex-col gap-5 px-4 xl:max-w-[55%]">
+      <div className="container flex flex-col gap-12 px-4 md:gap-0 xl:max-w-[55%]">
         <div className="flex flex-col gap-5">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Zacznij z AI
@@ -123,7 +123,9 @@ export default function Home() {
             </div>
           </form>
         </div>
-        <div ref={animationParentRef}>{showOutput && <Output {...completion} />}</div>
+        <div ref={animationParentRef}>
+          {showOutput && <Output {...completion} />}
+        </div>
       </div>
     </main>
   )
