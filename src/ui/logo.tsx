@@ -1,17 +1,21 @@
 "use client"
 
-import { cn } from '@/lib/utils'
 import { type PropsWithChildren } from "react"
 
-type LogoProps =  PropsWithChildren & {
-  withAnimation?:boolean
+import { cn } from "@/lib/utils"
+
+type LogoProps = PropsWithChildren & {
+  withAnimation?: boolean
 }
 
 export const Logo = ({ children, withAnimation }: LogoProps) => (
   <div className="group flex items-center gap-2">
-    <div className={cn({
-      "transition duration-500 ease-out group-hover:rotate-[360deg]": withAnimation
-    })}>
+    <div
+      className={cn({
+        "transition duration-500 ease-out group-hover:rotate-[360deg]":
+          withAnimation,
+      })}
+    >
       <svg
         width="30"
         height="30"

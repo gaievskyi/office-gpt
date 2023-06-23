@@ -38,7 +38,7 @@ export const Output = ({
 
     toast({
       title: "Skopiowano do schowka!",
-      description: "Użyj ⌘ + v żeby wkleić wynik."
+      description: "Użyj ⌘ + v żeby wkleić wynik.",
     })
   }
 

@@ -11,13 +11,17 @@ import { type Completion } from "@/lib/schemas"
 import { cn } from "@/lib/utils"
 
 import { prompt } from "./action"
+import { mono } from '@/lib/fonts'
 
 const MAX_INPUT_LENGTH = 4086
 
 export default function Home() {
   const formRef = useRef<HTMLFormElement | null>(null)
 
-  const [animationParentRef] = useAutoAnimate({easing: "linear", duration: 400})
+  const [animationParentRef] = useAutoAnimate({
+    easing: "linear",
+    duration: 400,
+  })
 
   const [completion, setCompletion] = useState<Completion>({
     role: "",
@@ -75,10 +79,7 @@ export default function Home() {
       <div className="container flex flex-col gap-12 px-4 md:gap-0 xl:max-w-[55%]">
         <div className="flex flex-col gap-5">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Parsuj oferty z
-            <span className="shine ml-2">
-              AI
-            </span>
+            Parsuj oferty z<span className="shine ml-2">AI</span>
           </h1>
           <form action={onSubmit} ref={formRef} className="flex flex-col gap-4">
             <label htmlFor="input">Wklej ofertę pracy</label>
@@ -88,6 +89,7 @@ export default function Home() {
               name="input"
               id="input"
               onChange={recalculateLength}
+              className={cn(mono.className)}
             />
             <small
               className={cn("flex justify-end", {
