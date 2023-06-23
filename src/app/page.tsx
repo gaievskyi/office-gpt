@@ -5,19 +5,34 @@ import { Bot, Loader } from "lucide-react"
 import { useRef, useState, useTransition } from "react"
 
 import { useToast } from "@/lib/hooks"
+import { type Completion } from "@/lib/schemas"
+import { cn } from "@/lib/utils"
 
-import { prompt, type Completion } from "./action"
+import { prompt } from "./action"
+
+const MAX_INPUT_LENGTH = 4086
 
 export default function Home() {
-  const { toast } = useToast()
+  const formRef = useRef<HTMLFormElement | null>(null)
+
   const [completion, setCompletion] = useState<Completion>({
     role: "",
     requirements: [],
     suggestedDepartments: [],
   })
-  const formRef = useRef<HTMLFormElement | null>(null)
+  const [showOutput, setShowOutput] = useState(false)
+  const [textAreaCount, setTextAreaCount] = useState(0)
 
+  const { toast } = useToast()
   const [isPending, startTransition] = useTransition()
+
+  const recalculateLength: React.ChangeEventHandler<HTMLTextAreaElement> = (
+    event
+  ) => {
+    setTextAreaCount(event.target.value.length)
+  }
+
+  const isMaxLength = textAreaCount === MAX_INPUT_LENGTH
 
   const onSubmit = (formData: FormData) => {
     startTransition(async () => {
@@ -32,6 +47,7 @@ export default function Home() {
         return
       }
       setCompletion(response)
+      setShowOutput(true)
       toast({
         title: "Sukces!",
         description: "Podsumowanie ogłoszenia o pracę jest gotowe.",
@@ -47,11 +63,27 @@ export default function Home() {
           <form action={onSubmit} ref={formRef} className="flex flex-col gap-4">
             <label htmlFor="input">Wklej ofertę pracy</label>
             <textarea
+              maxLength={MAX_INPUT_LENGTH}
               placeholder="Seeking .NET/C# Developer proficient in WinForms, WPF, and Devexpress. Task: optimize a WPF time scheduler and transform WinForms to WPF. Senior/Regular+ level, English B2. Duration: 4-6 months. Contact: ada@spyro-soft.com"
               name="input"
               id="input"
               className="min-h-[200px] rounded-xl bg-[#2F2F38] p-4"
+              onChange={recalculateLength}
             />
+            <small
+              className={cn("flex justify-end", {
+                "animate-bounce": isMaxLength,
+              })}
+            >
+              <span
+                className={cn({
+                  "font-bold": isMaxLength,
+                })}
+              >
+                {textAreaCount}/
+              </span>
+              <span>{MAX_INPUT_LENGTH}</span>
+            </small>
             <button
               type="submit"
               disabled={isPending}
@@ -71,7 +103,7 @@ export default function Home() {
             </button>
           </form>
         </div>
-        <Output {...completion} isLoading={isPending} />
+        {showOutput && <Output {...completion} />}
       </div>
     </main>
   )

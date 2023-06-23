@@ -3,6 +3,7 @@ import { Logo, ScreenSize, Show } from "@/ui"
 import "./globals.css"
 
 import { Toaster } from "@/ui/kit"
+import { type PropsWithChildren } from "react"
 
 import { IS_DEVELOPMENT } from "@/lib/constants"
 import { sans } from "@/lib/fonts"
@@ -13,11 +14,7 @@ export const metadata = {
   description: "",
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(sans.className, "bg-[#232328]")}>

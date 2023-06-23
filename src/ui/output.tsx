@@ -3,10 +3,10 @@
 import { Copy } from "lucide-react"
 
 import { useToast } from "@/lib/hooks"
+import { type Completion } from "@/lib/schemas"
 import { cn } from "@/lib/utils"
-import { type Completion } from "@/app/action"
 
-export type OutputProps = Completion & { isLoading?: boolean }
+export type OutputProps = Completion
 
 const getColorForMatch = (match: number) => {
   if (match >= 80) return "text-green-500"
@@ -18,7 +18,6 @@ export const Output = ({
   role,
   requirements,
   suggestedDepartments,
-  isLoading,
 }: OutputProps) => {
   const { toast } = useToast()
 
