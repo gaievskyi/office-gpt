@@ -6,6 +6,7 @@ import { useToast } from "@/lib/hooks"
 import { type Completion } from "@/lib/schemas"
 import { cn } from "@/lib/utils"
 
+import { Button } from "./kit"
 import { Logo } from "./logo"
 
 export type OutputProps = Completion
@@ -37,18 +38,19 @@ export const Output = ({
 
     toast({
       title: "Skopiowano do schowka!",
+      description: "Użyj ⌘ + v żeby wkleić wynik."
     })
   }
 
   return (
     <div className="flex min-h-[100%] flex-col gap-5 lg:max-w-[60%]">
       <Logo />
-      <div className="flex flex-col gap-2 rounded-xl bg-[#2F2F38] p-4">
+      <div className="flex flex-col gap-2 rounded-xl bg-[#2F2F38] p-4 text-sm">
         <>
           <span className="text-xl font-light uppercase text-[#B9B9CA]">
             Rola
           </span>
-          <span>{role}</span>
+          <span className="">{role}</span>
         </>
         <span className="text-xl font-light uppercase text-[#B9B9CA]">
           Wymagania
@@ -72,13 +74,14 @@ export const Output = ({
             </div>
           ))}
         </div>
-        <button
+        <Button
+          variant="outline"
           onClick={copy}
           disabled={!role || !requirements || !suggestedDepartments}
-          className="ml-auto mt-2 flex max-w-[200px] items-center justify-center gap-2 rounded-xl bg-white p-3 text-black transition-all hover:brightness-90 disabled:cursor-not-allowed disabled:brightness-75 hover:disabled:hover:brightness-75"
+          className="m-auto gap-2 rounded-full"
         >
           <Copy size={16} /> <span className="text-sm">Kopiuj</span>
-        </button>
+        </Button>
       </div>
     </div>
   )

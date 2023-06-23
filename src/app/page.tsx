@@ -1,7 +1,7 @@
 "use client"
 
 import { Output } from "@/ui"
-import { Button } from "@/ui/kit"
+import { Button, Textarea } from "@/ui/kit"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { Bot, Loader } from "lucide-react"
 import { useEffect, useRef, useState, useTransition } from "react"
@@ -17,7 +17,7 @@ const MAX_INPUT_LENGTH = 4086
 export default function Home() {
   const formRef = useRef<HTMLFormElement | null>(null)
 
-  const [animationParentRef] = useAutoAnimate()
+  const [animationParentRef] = useAutoAnimate({easing: "linear", duration: 400})
 
   const [completion, setCompletion] = useState<Completion>({
     role: "",
@@ -63,12 +63,8 @@ export default function Home() {
 
   useEffect(() => {
     if (showOutput) {
-      const scrollHeight = document.documentElement.scrollHeight
-      const windowHeight = window.innerHeight
-      const extraOffset = 100
-
       window.scrollTo({
-        top: scrollHeight - windowHeight + extraOffset,
+        top: document.documentElement.scrollHeight,
         behavior: "smooth",
       })
     }
@@ -79,16 +75,18 @@ export default function Home() {
       <div className="container flex flex-col gap-12 px-4 md:gap-0 xl:max-w-[55%]">
         <div className="flex flex-col gap-5">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Zacznij z AI
+            Parsuj oferty z
+            <span className="shine ml-2">
+              AI
+            </span>
           </h1>
           <form action={onSubmit} ref={formRef} className="flex flex-col gap-4">
             <label htmlFor="input">Wklej ofertę pracy</label>
-            <textarea
+            <Textarea
               maxLength={MAX_INPUT_LENGTH}
-              placeholder="Seeking .NET/C# Developer proficient in WinForms, WPF, and Devexpress. Task: optimize a WPF time scheduler and transform WinForms to WPF. Senior/Regular+ level, English B2. Duration: 4-6 months. Contact: ada@spyro-soft.com"
+              placeholder="Przykład: Seeking .NET/C# Developer proficient in WinForms, WPF, and Devexpress. Task: optimize a WPF time scheduler and transform WinForms to WPF. Senior/Regular+ level, English B2. Duration: 4-6 months. Contact: email@example.com"
               name="input"
               id="input"
-              className="min-h-[200px] rounded-xl bg-[#2F2F38] p-4"
               onChange={recalculateLength}
             />
             <small
